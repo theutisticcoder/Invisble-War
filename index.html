@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Invisible War</title>
+	<script src="socket.io.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+	<link rel="icon" href="forest.jpeg" />
+		<link rel="manifest" href="manifest.json" />
+<style>
+	#other{
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		transform-origin: -2500px 0px -7500px;
+	}
+	#soldier:hover{
+		cursor: pointer;
+		position: absolute;
+		height: 300px;
+		width: 100px;
+		transform-origin: -2500px 0px -7500px;
+		z-index: 9;
+	}
+	#soldier{
+		cursor: pointer;
+		position: absolute;
+		height: 300px;
+		width: 100px;
+		transform-origin: -2500px 0px -7500px;
+	}
+	.score{
+		cursor: pointer;
+		position: absolute;
+		z-index: 9;
+		left: 80%;
+	}
+	#enemyhealth{
+		left: 75%;
+	}
+	#username{
+		position: absolute;
+		transform-origin: -2500px 0px -7500px;
+	}
+	#panther {
+		transform-style: preserve-3d;
+		cursor: pointer;
+		top: 100px;
+		height: 500px;
+		width: 500px;
+		position: absolute;
+		transform: translateY(-800px) perspective(60000px) translateX(50px);
+	}
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	#range {
+		color: black;
+		z-index: 5;
+		font-size: 20pt;
+		position: absolute;
+		top: 150px;
+	}
+	#coordinates {
+		color: black;
+		z-index: 5;
+		font-size: 20pt;
+		position: absolute;
+		top: 200px;
+	}
+	#enemy {
+		color: black;
+		z-index: 5;
+		font-size: 20pt;
+		position: absolute;
+		top: 250px;
+	}
+	#ammo {
+		color: black;
+		z-index: 5;
+		font-size: 20pt;
+		position: absolute;
+		top: 300px;
+	}
+	#health {
+		content: "health";
+  background: red;
+		height: 50px;
+		width: 50%;
+		z-index: 5;
+		position: absolute;
+	}
+		#health::-webkit-progress-value {
+  background: red;
+}
+	#enemyhealth{
+  background: blue;
+		height: 50px;
+		width: 50%;
+		z-index: 5;
+		left: 50%;
+		position: absolute;
+	}
+	#enemyhealth::-webkit-progress-value {
+  background: blue;
+}
+	p {
+		left: 25%;
+ 		color: white;
+		z-index: 6;
+		position: absolute;
+	}
+
+
+	#bullet {
+		position: absolute;
+		height: 200px;
+		width: 400px;
+		z-index: 3;
+		top: 50%;
+		left: 50%;
+	}
+
+	#bottom {
+		z-index: 1;
+		position: absolute;
+		transform-origin: bottom;
+		height: 50px;
+		width: 50px;
+		transform: rotateX(90deg) translateY(-25px);
+	}
+
+	#panther {
+		transform-style: preserve-3d;
+		cursor: pointer;
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		transform: translateY(400px) translateX(50px);
+	}
+
+	#world {
+		position: relative;
+		transform-origin: -2500px 0px -7500px;
+	}
+
+	body {
+		overflow: hidden;
+		background-image: url(Dirt.jpg);
+	}
+
+	#main {
+		text-align: center;
+		border: 2px solid black;
+		z-index: 3;
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		transform: translateY(-5050px);
+		background-color: white;
+		color: black;
+		font-size: 30pt;
+	}
+	#main:hover {
+		text-align: center;
+		border: 2px solid white;
+		z-index: 3;
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		transform: translateY(-5050px);
+		background-color: black;
+		color: white;
+		font-size: 30pt;
+	}
+
+	#boxDiv {
+		width: 50px;
+		height: 50px;
+		transform-style: preserve-3d;
+	}
+
+	#boxDiv div {
+		position: absolute;
+	}
+
+	#treeDiv {
+		width: 50px;
+		height: 50px;
+		transform-style: preserve-3d;
+	}
+
+	#treeDiv div {
+		position: absolute;
+	}
+
+	#tree {
+		
+		z-index: -1;
+		position: absolute;
+		height: 200px;
+		width: 50px;
+		transform: rotateX(180deg) translateY(150px);
+		transform-style: preserve-3d;
+		transform-origin: bottom;
+	}
+
+	#universe {
+		z-index: 1;
+		perspective: 30000px;
+		transform: translateY(-400px);
+		transform-style: preserve-3d;
+		transform-origin: -2500px 0px -7500px;
+		position: absolute;
+	}
+	mark{
+		color: yellow;
+	}
+	 #healthp{
+		 left: 75%;
+ 		color: white;
+		z-index: 6;
+		position: absolute;
+	 }
+</style>
+	<p>Health</p>
+	
+	<p id="healthp" hidden="true">Enemy Health</p>
+<progress id="health" value="5" max="5"></progress>
+	<progress id="enemyhealth" hidden="true" value="5" max="5"></progress>
+<mark id="range">Range: 200</mark>
+<mark id="ammo">Ammo: 20</mark>
+<mark id="enemy">A soldier is at X: 50 Z: 0</mark>
+<mark id="coordinates">You are at X: -1000 Z: 0</mark>
+
+<body>
+	<script src='https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js'></script>
+<script>
+	if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(res => console.log("service worker registered"))
+      .catch(err => console.log("service worker not registered", err))
+  })
+}
+</script>
+
+	<mark id="score"></mark>
+	<img id="other" src="silhouette.png"/>
+	<audio id="shot" src="boing.mp3"></audio>
+	<img src="Gun.png" id="bullet"/>
+	<div id="universe">
+		<div id="world">
+			<img src="soldier.png" id="panther" class="soldier"/>
+			<div id="mainDiv">
+				<div id="boxDiv">
+					<img src="ground.jpeg" id="bottom"/>
+					<img id="tree" hidden="true" class="tree" src="Cactus.png" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="app.js"></script>
+</body>
+
+</html>

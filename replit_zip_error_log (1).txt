@@ -1,0 +1,7 @@
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/extract-zip","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/mime","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/mkdirp","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/nativefier","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/rimraf","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/tauri","time":"2023-05-12T17:23:04Z"}
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/puppeteer-core/node_modules/.bin/mime","time":"2023-05-12T17:24:21Z"}
